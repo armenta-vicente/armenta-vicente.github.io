@@ -1,0 +1,16 @@
+version: '3.6'
+services:
+  db:
+    container_name: 'accounting_app_db'
+    image: mysql:5.7.23
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+  www:
+    depends_on:
+      - db
+    container_name: 'accounting_php_apache'
+    image: php:apache
+    volumes:
+      - "./:/var/www/html/"
+    ports:
+      - 8080:80
